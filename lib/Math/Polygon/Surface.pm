@@ -3,7 +3,7 @@ use warnings;
 
 package Math::Polygon::Surface;
 use vars '$VERSION';
-$VERSION = '0.001';
+$VERSION = '0.002';
 use Math::Polygon;
 
 

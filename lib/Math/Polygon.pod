@@ -131,7 +131,7 @@ reference to an ARRAY.
 =head2 Simple calculations
 
 
-B<area>
+$obj-E<gt>B<area>
 
 =over 4
 
@@ -169,6 +169,22 @@ functions provided by this module beautify
  remove_spikes              <false>
 
 . remove_spikes BOOLEAN
+
+=back
+
+$obj-E<gt>B<clockwise>
+
+=over 4
+
+Make sure the points are in clockwise order.
+
+=back
+
+$obj-E<gt>B<counterClockwise>
+
+=over 4
+
+Make sure the points are in counter-clockwise order.
 
 =back
 
@@ -231,6 +247,245 @@ $obj-E<gt>B<string>
 
 =back
 
+=head2 Transformations
+
+Implemented in L<Math::Polygon::Transform|Math::Polygon::Transform>: changes on the structure of
+the polygon except clipping.  All functions return a new polygon object
+or undef.
+
+$obj-E<gt>B<grid>(OPTIONS)
+
+=over 4
+
+Returns a polygon object with the points snapped to grid points.
+See L<Math::Polygon::Transform::polygon_grid()|Math::Polygon::Transform/"FUNCTIONS">.
+
+ Option  Defined in  Default
+ raster              1.0    
+
+. raster FLOAT
+
+=over 4
+
+The raster size, which determines the points to round to.  The origin
+C<[0,0]> is always on a grid-point.  When the raster value is zero,
+no transformation will take place.
+
+=back
+
+=back
+
+$obj-E<gt>B<mirror>(OPTIONS)
+
+=over 4
+
+Mirror the polygon in a line.  Only one of the options can be provided.
+Some programs call this "flip" or "flop".
+
+ Option  Defined in       Default 
+ b                        C<0>    
+ line                     <undef> 
+ rc                       C<undef>
+ x                        C<undef>
+ y                        C<undef>
+
+. b FLOAT
+
+=over 4
+
+Only used in combination with option C<rc> to describe a line.
+
+=back
+
+. line [POINT, POINT]
+
+=over 4
+
+Alternative way to specify the mirror line.  The C<rc> and C<b> are
+computed from the two points of the line.
+
+=back
+
+. rc FLOAT
+
+=over 4
+
+Description of the line which is used to mirror in. The line is
+C<y= rc*x+b>.  The C<rc> equals C<-dy/dx>, the firing angle.  If
+C<undef> is explicitly specified then C<b> is used as constant x: it's
+a vertical mirror.
+
+=back
+
+. x FLOAT
+
+=over 4
+
+Mirror in the line C<x=value>, which means that C<y> stays unchanged.
+
+=back
+
+. y FLOAT
+
+=over 4
+
+Mirror in the line C<y=value>, which means that C<x> stays unchanged.
+
+=back
+
+=back
+
+$obj-E<gt>B<move>(OPTIONS)
+
+=over 4
+
+Returns a moved polygon object: all point are moved over the
+indicated distance.  See L<Math::Polygon::Transform::polygon_move()|Math::Polygon::Transform/"FUNCTIONS">.
+
+ Option  Defined in       Default
+ dx                       0      
+ dy                       0      
+
+. dx FLOAT
+
+=over 4
+
+Displacement in the horizontal direction.
+
+=back
+
+. dy FLOAT
+
+=over 4
+
+Displacement in the vertical direction.
+
+=back
+
+=back
+
+$obj-E<gt>B<resize>(OPTIONS)
+
+=over 4
+
+Returns a resized polygon object.
+See L<Math::Polygon::Transform::polygon_resize()|Math::Polygon::Transform/"FUNCTIONS">.
+
+ Option  Defined in       Default 
+ center                   C<[0,0]>
+ scale                    C<1.0>  
+ xscale                   <scale> 
+ yscale                   <scale> 
+
+. center POINT
+
+. scale FLOAT
+
+=over 4
+
+Resize the polygon with the indicated factor.  When the factor is larger
+than 1, the resulting polygon with grow, when small it will be reduced in
+size.  The scale will be respective from the center.
+
+=back
+
+. xscale FLOAT
+
+=over 4
+
+Specific scaling factor in the horizontal direction.
+
+=back
+
+. yscale FLOAT
+
+=over 4
+
+Specific scaling factor in the vertical direction.
+
+=back
+
+=back
+
+$obj-E<gt>B<rotate>(OPTIONS)
+
+=over 4
+
+Returns a rotated polygon object: all point are moved over the
+indicated distance.  See L<Math::Polygon::Transform::polygon_rotate()|Math::Polygon::Transform/"FUNCTIONS">.
+
+ Option   Defined in       Default 
+ center                    C<[0,0]>
+ degrees                   0       
+ radians                   0       
+
+. center POINT
+
+. degrees FLOAT
+
+=over 4
+
+specify rotation angle in degrees (between -180 and 360).
+
+=back
+
+. radians FLOAT
+
+=over 4
+
+specify rotation angle in rads (between -pi and 2*pi)
+
+=back
+
+=back
+
+$obj-E<gt>B<simplify>(OPTIONS)
+
+=over 4
+
+Returns a polygon object where points are removed.
+See L<Math::Polygon::Transform::polygon_simplify()|Math::Polygon::Transform/"FUNCTIONS">.
+
+ Option      Defined in       Default  
+ max_points                   C<undef> 
+ same                         C<0.0001>
+ slope                        C<undef> 
+
+. max_points INTEGER
+
+=over 4
+
+First, C<same> and C<slope> reduce the number of points.  Then, if there
+are still more than the specified number of points left, the points with
+the widest angles will be removed until the specified maximum number is
+reached.
+
+=back
+
+. same FLOAT
+
+=over 4
+
+The distance between two points to be considered "the same" point.  The value
+is used as radius of the circle.
+
+=back
+
+. slope FLOAT
+
+=over 4
+
+With three points X(n),X(n+1),X(n+2), the point X(n+1) will be removed if
+the length of the path over all three points is less than C<slope> longer
+than the direct path between X(n) and X(n+2).
+
+The slope will not be removed around the starting point of the polygon.
+Removing points will change the area of the polygon.
+
+=back
+
+=back
+
 =head2 Clipping
 
 
@@ -271,7 +526,7 @@ See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more detail
 
 =head1 COPYRIGHTS
 
-Module version 0.001.
+Module version 0.002.
 Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
 other contributors.
 

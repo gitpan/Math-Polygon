@@ -3,9 +3,11 @@ use warnings;
 
 package Math::Polygon;
 use vars '$VERSION';
-$VERSION = '0.001';
+$VERSION = '0.002';
+
 use Math::Polygon::Calc;
 use Math::Polygon::Clip;
+use Math::Polygon::Transform;
 
 
 sub new(@)
@@ -51,7 +53,7 @@ sub point(@)
 }
 
 
-sub string() { polygon_string shift->points }
+sub string() { polygon_string(shift->points) }
 
 
 sub bbox()
@@ -74,6 +76,26 @@ sub isClockwise()
 {   my $self = shift;
     return $self->{MP_clockwise} if defined $self->{MP_clockwise};
     $self->{MP_clockwise} = polygon_is_clockwise $self->points;
+}
+
+
+sub clockwise()
+{   my $self = shift;
+    return $self if $self->isClockwise;
+
+    $self->{MP_points}    = [ reverse $self->points ];
+    $self->{MP_clockwise} = 1;
+    $self;
+}
+
+
+sub counterClockwise()
+{   my $self = shift;
+    return $self unless $self->isClockwise;
+
+    $self->{MP_points}    = [ reverse $self->points ];
+    $self->{MP_clockwise} = 0;
+    $self;
 }
 
 
@@ -114,6 +136,83 @@ sub same($;@)
         $tolerance = shift;
     }
     polygon_same scalar($self->points), $other, $tolerance;
+}
+
+
+sub resize(@)
+{   my $self = shift;
+
+    my $clockwise = $self->{MP_clockwise};
+    if(defined $clockwise)
+    {   my %args   = @_;
+        my $xscale = $args{xscale} || $args{scale} || 1;
+        my $yscale = $args{yscale} || $args{scale} || 1;
+        $clockwise = not $clockwise if $xscale * $yscale < 0;
+    }
+
+    (ref $self)->new
+       ( points    => [ polygon_resize @_, $self->points ]
+       , clockwise => $clockwise
+       # we could save the bbox calculation as well
+       );
+}
+
+
+sub move(@)
+{   my $self = shift;
+
+    (ref $self)->new
+       ( points    => [ polygon_move @_, $self->points ]
+       , clockwise => $self->{MP_clockwise}
+       , bbox      => $self->{MP_bbox}
+       );
+}
+
+
+sub rotate(@)
+{   my $self = shift;
+
+    (ref $self)->new
+       ( points    => [ polygon_rotate @_, $self->points ]
+       , clockwise => $self->{MP_clockwise}
+       # we could save the bbox calculation as well
+       );
+}
+
+
+sub grid(@)
+{   my $self = shift;
+
+    (ref $self)->new
+       ( points    => [ polygon_grid @_, $self->points ]
+       , clockwise => $self->{MP_clockwise}  # probably
+       # we could save the bbox calculation as well
+       );
+}
+
+
+sub mirror(@)
+{   my $self = shift;
+
+    my $clockwise = $self->{MP_clockwise};
+    $clockwise    = not $clockwise if defined $clockwise;
+
+    (ref $self)->new
+       ( points    => [ polygon_grid @_, $self->points ]
+       , clockwise => $clockwise
+       # we could save the bbox calculation as well
+       );
+}
+
+
+sub simplify(@)
+{   my $self = shift;
+
+    (ref $self)->new
+       ( points    => [ polygon_simplify @_, $self->points ]
+       , clockwise => $self->{MP_clockwise}  # probably
+       , bbox      => $self->{MP_bbox}       # protect bounds
+       );
 }
 
 

@@ -4,7 +4,7 @@ use warnings;
 
 package Math::Polygon::Clip;
 use vars '$VERSION';
-$VERSION = '0.001';
+$VERSION = '0.002';
 use base 'Exporter';
 
 our @EXPORT = qw/
@@ -46,7 +46,7 @@ sub polygon_fill_clip1($@)
 	push @cropped, [$x, $y];
     }
 
-    polygon_beautify({despike => 1}, @cropped);
+    polygon_beautify {despike => 1}, @cropped;
 }
 
 

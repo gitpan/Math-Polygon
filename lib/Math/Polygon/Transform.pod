@@ -1,29 +1,33 @@
 
 =head1 NAME
 
-Math::Polygon::Clip - frame a polygon in a square
+Math::Polygon::Transform - Polygon transformation
 
 
 =head1 INHERITANCE
 
- Math::Polygon::Clip
+ Math::Polygon::Transform
    is a Exporter
 
 
 =head1 SYNOPSIS
 
- my @poly  = ( [1,2], [2,4], [5,7], [1, 2] );
- my @box   = ( $xmin, $ymin, $xmax, $ymax );
+ my @poly = ( [1,2], [2,4], [5,7], [1, 2] );
 
- my $boxed = polygon_clip \@box, @poly;
+ my $area = polygon_transform resize => 3.14, @poly;
 
 
 =head1 DESCRIPTION
 
-Cut-off all parts of the polygon which are outside the box
+This package contains polygon transformation algorithms.
 
 
 
+
+
+=head1 DIAGNOSTICS
+
+I<Error:> you need to specify 'x', 'y', 'rc', or 'line'
 
 
 

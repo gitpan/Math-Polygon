@@ -25,7 +25,7 @@ Math::Polygon::Calc - Simple polygon calculations
 
 =head1 DESCRIPTION
 
-This packages contains a wide variaty of relatively easy polygon
+This package contains a wide variaty of relatively easy polygon
 calculations.  More complex calculations are put in separate
 packages.
 
@@ -44,7 +44,7 @@ See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more detail
 
 =head1 COPYRIGHTS
 
-Module version 0.001.
+Module version 0.002.
 Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
 other contributors.
 

@@ -3,7 +3,7 @@ use warnings;
 
 package Math::Polygon::Calc;
 use vars '$VERSION';
-$VERSION = '0.001';
+$VERSION = '0.002';
 use base 'Exporter';
 
 our @EXPORT = qw/
@@ -12,6 +12,8 @@ our @EXPORT = qw/
  polygon_beautify
  polygon_equal
  polygon_is_clockwise
+ polygon_clockwise
+ polygon_counter_clockwise
  polygon_perimeter
  polygon_same
  polygon_start_minxy
@@ -56,6 +58,17 @@ sub polygon_is_clockwise(@)
 }
 
 
+sub polygon_clockwise(@)
+{   polygon_is_clockwise(@_) ? @_ : reverse @_;
+}
+
+
+sub polygon_counter_clockwise(@)
+{   polygon_is_clockwise(@_) ? reverse(@_) : @_;
+}
+
+
+
 sub polygon_perimeter(@)
 {   my $l    = 0;
 
@@ -69,28 +82,32 @@ sub polygon_perimeter(@)
 
 
 sub polygon_start_minxy(@)
-{   my $minxy = pop @_;    # last==first, remove it
-    return $minxy unless @_;
-    my $rot   = 0;
-    my @res   = @_;
+{
+    return @_ if @_ <= 1;
+    my $ring  = $_[0][0]==$_[-1][0] && $_[-1][1]==$_[-1][1];
+    pop @_ if $ring;
 
-    for(my $i=1; $i<@res; $i++)
-    {   if(   $res[$i][0] < $minxy->[0]
-	   || ($res[$i][0]==$minxy->[0] && $res[$i][1] < $minxy->[1])
-	  )
-	{   $minxy = $res[$i];
+    my $rot   = 0;
+    my $minxy = $_[0];
+
+    for(my $i=1; $i<@_; $i++)
+    {   next if $_[$i][0] > $minxy->[0];
+
+        if($_[$i][0] < $minxy->[0] || $_[$i][1] < $minxy->[1])
+	{   $minxy = $_[$i];
 	    $rot   = $i;
 	}
     }
 
-    my @rot = splice @res, 0, $rot;
-    (@res, @rot, $minxy);
+    $rot==0 ? (@_, ($ring ? $minxy : ()))
+            : (@_[$rot..$#_], @_[0..$rot-1], ($ring ? $minxy : ()));
 }
 
 
 sub polygon_beautify(@)
-{   return () unless @_;
-    my %opts     = ref $_[0] eq 'HASH' ? %{ (shift) } : ();
+{   my %opts     = ref $_[0] eq 'HASH' ? %{ (shift) } : ();
+    return () unless @_;
+
     my $despike  = exists $opts{remove_spikes}  ? $opts{remove_spikes}  : 0;
 #   my $interpol = exists $opts{remove_between} ? $opts{remove_between} : 0;
 
@@ -108,7 +125,7 @@ sub polygon_beautify(@)
 
          # remove doubles
 	 my ($x, $y) = @$this;
-         while(@_ && $res[0][0]==$x && $res[0][1]==$y)
+         while(@res && $res[0][0]==$x && $res[0][1]==$y)
 	 {   $unchanged = 0;
              shift @res;
 	 }
@@ -173,7 +190,7 @@ sub polygon_beautify(@)
 	 }
     }
 
-    @res, $res[0];
+    @res ? (@res, $res[0]) : ();
 }
 
 
