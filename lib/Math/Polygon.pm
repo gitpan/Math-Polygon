@@ -3,7 +3,7 @@ use warnings;
 
 package Math::Polygon;
 use vars '$VERSION';
-$VERSION = '0.002';
+$VERSION = '0.003';
 
 use Math::Polygon::Calc;
 use Math::Polygon::Clip;
@@ -136,6 +136,12 @@ sub same($;@)
         $tolerance = shift;
     }
     polygon_same scalar($self->points), $other, $tolerance;
+}
+
+
+sub contains($)
+{   my ($self, $point) = @_;
+    polygon_contains_point($point, shift->points);
 }
 
 

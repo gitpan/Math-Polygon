@@ -44,7 +44,7 @@ See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more detail
 
 =head1 COPYRIGHTS
 
-Module version 0.002.
+Module version 0.003.
 Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
 other contributors.
 

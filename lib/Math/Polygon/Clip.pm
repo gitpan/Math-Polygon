@@ -4,7 +4,7 @@ use warnings;
 
 package Math::Polygon::Clip;
 use vars '$VERSION';
-$VERSION = '0.002';
+$VERSION = '0.003';
 use base 'Exporter';
 
 our @EXPORT = qw/

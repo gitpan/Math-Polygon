@@ -1,7 +1,6 @@
 ChangeLog
 MANIFEST
 MANIFEST.extra
-META.yml                                 Module meta-data (added by MakeMaker)
 Makefile.PL
 lib/Math/Polygon.pm
 lib/Math/Polygon.pod
@@ -19,6 +18,7 @@ t/10box.t
 t/11size.t
 t/12beauty.t
 t/13rot.t
+t/14inside.t
 t/30cross.t
 t/31clipl.t
 t/32clipf1.t
@@ -31,3 +31,4 @@ t/45simple.t
 t/90polygon.t
 t/91surface.t
 version
+META.yml                                 Module meta-data (added by MakeMaker)

@@ -180,6 +180,15 @@ Make sure the points are in clockwise order.
 
 =back
 
+$obj-E<gt>B<contains>(POINT)
+
+=over 4
+
+Returns a truth value indicating whether the point is inside the polygon
+or not.  On the edge is inside.
+
+=back
+
 $obj-E<gt>B<counterClockwise>
 
 =over 4
@@ -234,9 +243,10 @@ $obj-E<gt>B<startMinXY>
 
 =over 4
 
-Returns a new polygon object, where the point with the smallest x coordinate
-is at the start (and end, of course).  If more points share the x coordinate,
-the smallest y-values will make the final decission.
+Returns a new polygon object, where the points are rotated in such a way
+that the point which is losest to the left-bottom point of the bouding
+box has become the first.
+
 Function L<Math::Polygon::Calc::polygon_start_minxy()|Math::Polygon::Calc/"FUNCTIONS">.
 
 =back
@@ -526,7 +536,7 @@ See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more detail
 
 =head1 COPYRIGHTS
 
-Module version 0.002.
+Module version 0.003.
 Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
 other contributors.
 

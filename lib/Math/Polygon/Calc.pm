@@ -3,7 +3,7 @@ use warnings;
 
 package Math::Polygon::Calc;
 use vars '$VERSION';
-$VERSION = '0.002';
+$VERSION = '0.003';
 use base 'Exporter';
 
 our @EXPORT = qw/
@@ -18,6 +18,7 @@ our @EXPORT = qw/
  polygon_same
  polygon_start_minxy
  polygon_string
+ polygon_contains_point
 /;
 
 use List::Util    qw/min max/;
@@ -82,25 +83,27 @@ sub polygon_perimeter(@)
 
 
 sub polygon_start_minxy(@)
-{
-    return @_ if @_ <= 1;
+{   return @_ if @_ <= 1;
     my $ring  = $_[0][0]==$_[-1][0] && $_[-1][1]==$_[-1][1];
     pop @_ if $ring;
 
+    my ($xmin, $ymin) = polygon_bbox @_;
+
     my $rot   = 0;
-    my $minxy = $_[0];
+    my $dmin_sq = ($_[0][0]-$xmin)**2 + ($_[0][1]-$ymin)**2;
 
     for(my $i=1; $i<@_; $i++)
-    {   next if $_[$i][0] > $minxy->[0];
+    {   next if $_[$i][0] - $xmin > $dmin_sq;
 
-        if($_[$i][0] < $minxy->[0] || $_[$i][1] < $minxy->[1])
-	{   $minxy = $_[$i];
-	    $rot   = $i;
+        my $d_sq = ($_[$i][0]-$xmin)**2 + ($_[$i][1]-$ymin)**2;
+        if($d_sq < $dmin_sq)
+	{   $dmin_sq = $d_sq;
+	    $rot     = $i;
 	}
     }
 
-    $rot==0 ? (@_, ($ring ? $minxy : ()))
-            : (@_[$rot..$#_], @_[0..$rot-1], ($ring ? $minxy : ()));
+    $rot==0 ? (@_, ($ring ? $_[0] : ()))
+            : (@_[$rot..$#_], @_[0..$rot-1], ($ring ? $_[$rot] : ()));
 }
 
 
@@ -223,6 +226,56 @@ sub polygon_same($$;$)
     my @f = polygon_start_minxy @{ (shift) };
     my @s = polygon_start_minxy @{ (shift) };
     polygon_equal \@f, \@s, @_;
+}
+
+
+
+# Algorithms can be found at
+# http://astronomy.swin.edu.au/~pbourke/geometry/insidepoly/
+# p1 = polygon[0];
+# for (i=1;i<=N;i++) {
+#   p2 = polygon[i % N];
+#   if (p.y > MIN(p1.y,p2.y)) {
+#     if (p.y <= MAX(p1.y,p2.y)) {
+#       if (p.x <= MAX(p1.x,p2.x)) {
+#         if (p1.y != p2.y) {
+#           xinters = (p.y-p1.y)*(p2.x-p1.x)/(p2.y-p1.y)+p1.x;
+#           if (p1.x == p2.x || p.x <= xinters)
+#             counter++;
+#         }
+#       }
+#     }
+#   }
+#   p1 = p2;
+# }
+# inside = counter % 2;
+
+sub polygon_contains_point($@)
+{   my $point = shift;
+    return 0 if @_ < 3;
+
+    my ($x, $y) = @$point;
+    my $inside  = 0;
+
+    my ($px, $py) = @{ (shift) };
+    while(@_)
+    {   my ($nx, $ny) = @{ (shift) };
+        if(    $py == $ny
+            || ($y <= $py && $y <= $ny)
+            || ($y >  $py && $y >  $ny)
+            || ($x >  $px && $x >  $nx)
+          )
+        {   ($px, $py) = ($nx, $ny);
+            next;
+        }
+
+        $inside = !$inside
+            if $px==$nx || $x <= ($y-$py)*($nx-$px)/($ny-$py)+$px;
+
+        ($px, $py) = ($nx, $ny);
+    }
+
+    $inside;
 }
 
 1;
