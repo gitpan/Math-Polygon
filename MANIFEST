@@ -1,0 +1,25 @@
+ChangeLog
+MANIFEST
+MANIFEST.extra
+META.yml                                 Module meta-data (added by MakeMaker)
+Makefile.PL
+lib/Math/Polygon.pm
+lib/Math/Polygon.pod
+lib/Math/Polygon/Calc.pm
+lib/Math/Polygon/Calc.pod
+lib/Math/Polygon/Clip.pm
+lib/Math/Polygon/Clip.pod
+lib/Math/Polygon/Surface.pm
+lib/Math/Polygon/Surface.pod
+mkdist
+mkdoc
+t/10box.t
+t/11size.t
+t/12beauty.t
+t/13rot.t
+t/30cross.t
+t/31clipl.t
+t/32clipf1.t
+t/90polygon.t
+t/91surface.t
+version

@@ -1,0 +1,48 @@
+
+=head1 NAME
+
+Math::Polygon::Clip - frame a polygon in a square
+
+
+=head1 INHERITANCE
+
+ Math::Polygon::Clip
+   is a Exporter
+
+
+=head1 SYNOPSIS
+
+ my @poly  = ( [1,2], [2,4], [5,7], [1, 2] );
+ my @box   = ( $xmin, $ymin, $xmax, $ymax );
+
+ my $boxed = polygon_clip \@box, @poly;
+
+
+=head1 DESCRIPTION
+
+Cut-off all parts of the polygon which are outside the box
+
+
+
+
+
+
+
+
+
+
+=head1 REFERENCES
+
+See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more details.
+
+=head1 COPYRIGHTS
+
+Module version 0.001.
+Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
+other contributors.
+
+Copyright (c) 2004 by the author(s). All rights reserved.  This program
+is free software; you can redistribute it and/or modify it under the
+same terms as Perl itself.
+
+

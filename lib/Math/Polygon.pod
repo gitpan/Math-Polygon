@@ -1,0 +1,282 @@
+
+=head1 NAME
+
+Math::Polygon - Class for maintaining polygon data
+
+
+
+=head1 SYNOPSIS
+
+ my $poly = Math::Polygon->new( [1,2], [2,4], [5,7], [1,2] );
+ print $poly->nrPoints;
+ my @p    = $poly->points;
+
+ my ($xmin, $ymin, $xmax, $ymax) = $poly->bbox;
+
+ my $area = $poly->area;
+ my $l    = $poly->perimeter;
+ if($poly->isClockwise) { ... };
+ 
+ my $rot  = $poly->startMinXY;
+
+ my $boxed = $poly->lineClip($xmin, $xmax, $ymin, $ymax);
+
+
+=head1 DESCRIPTION
+
+This class provides an OO interface around L<Math::Polygon::Calc|Math::Polygon::Calc>
+and L<Math::Polygon::Clip|Math::Polygon::Clip>.
+
+
+
+=head1 METHODS
+
+
+=head2 Constructors
+
+
+$obj-E<gt>B<new>([OPTIONS], [POINTS], [OPTIONS])
+
+Math::Polygon-E<gt>B<new>([OPTIONS], [POINTS], [OPTIONS])
+
+=over 4
+
+You may add OPTIONS after and/or before the POINTS.  You may also use
+the "points" options to get the points listed.  POINTS are references
+to an ARRAY of X and Y.
+
+When C<new> is called as instance method, it is believed that the
+new polygon is derived from the callee, and therefore some facts
+(like clockwise or anti-clockwise direction) will get copied unless
+overruled.
+
+ Option     Defined in       Default
+ bbox                        undef  
+ clockwise                   undef  
+ points                      undef  
+
+. bbox ARRAY
+
+=over 4
+
+Usually computed from the figure automatically, but can also be
+specified as [xmin,ymin,xmax, ymax].  See L<bbox()|Math::Polygon/"Simple calculations">.
+
+=back
+
+. clockwise BOOLEAN
+
+=over 4
+
+Is not specified, it will be computed by the L<isClockwise()|Math::Polygon/"Simple calculations"> method
+on demand.
+
+=back
+
+. points ARRAY-OF-POINTS
+
+=over 4
+
+See L<points()|Math::Polygon/"Attributes"> and L<nrPoints()|Math::Polygon/"Attributes">.
+
+=back
+
+I<Example:> creation of new polygon
+
+
+ my $p = Math::Polygon->new([1,0],[1,1],[0,1],[0,0],[1,0]);
+
+ my @p = ([1,0],[1,1],[0,1],[0,0],[1,0]);
+ my $p = Math::Polygon->new(points => \@p);
+
+=back
+
+=head2 Attributes
+
+
+$obj-E<gt>B<nrPoints>
+
+=over 4
+
+Returns the number of points,
+
+=back
+
+$obj-E<gt>B<order>
+
+=over 4
+
+Returns the number of uniqe points: one less than L<nrPoints()|Math::Polygon/"Attributes">.
+
+=back
+
+$obj-E<gt>B<point>(INDEX, [INDEX, ...])
+
+=over 4
+
+Returns the point with the specified INDEX or INDEXES.  In SCALAR context,
+only the first INDEX is used.
+
+=back
+
+$obj-E<gt>B<points>
+
+=over 4
+
+In LIST context, the points are returned as list, otherwise as
+reference to an ARRAY.
+
+=back
+
+=head2 Simple calculations
+
+
+B<area>
+
+=over 4
+
+Returns the area enclosed by the polygon.  The last point of the list
+must be the same as the first to produce a correct result.  The computed
+result is cached.
+Function L<Math::Polygon::Calc::polygon_area()|Math::Polygon::Calc/"FUNCTIONS">.
+
+=back
+
+$obj-E<gt>B<bbox>
+
+=over 4
+
+Returns a list with four elements: (xmin, ymin, xmax, ymax), which describe
+the bounding box of the polygon (all points of the polygon are inside that
+area).  The computation is expensive, and therefore, the results are
+cached.
+Function L<Math::Polygon::Calc::polygon_bbox()|Math::Polygon::Calc/"FUNCTIONS">.
+
+=back
+
+$obj-E<gt>B<beautify>(OPTIONS)
+
+=over 4
+
+Returns a new, beautified version of this polygon.
+Function L<Math::Polygon::Calc::polygon_beautify()|Math::Polygon::Calc/"FUNCTIONS">.
+
+Polygons, certainly after some computations, can have a lot of
+horrible artifacts: points which are double, spikes, etc.  This
+functions provided by this module beautify
+
+ Option         Defined in  Default
+ remove_spikes              <false>
+
+. remove_spikes BOOLEAN
+
+=back
+
+$obj-E<gt>B<equal>((OTHER|ARRAY, [TOLERANCE])|POINTS)
+
+=over 4
+
+Compare two polygons, on the level of points. When the polygons are
+the same but rotated, this will return false. See L<same()|Math::Polygon/"Simple calculations">.
+Function L<Math::Polygon::Calc::polygon_equal()|Math::Polygon::Calc/"FUNCTIONS">.
+
+=back
+
+$obj-E<gt>B<isClockwise>
+
+=over 4
+
+The points are (in majority) orded in the direction of the hands of the clock.
+This calculation is quite expensive (same effort as calculating the area of
+the polygon), and the result is therefore cached.
+
+=back
+
+$obj-E<gt>B<perimeter>
+
+=over 4
+
+The length of the line of the polygon.  This can also be used to compute
+the length of any line: of the last point is not equal to the first, then
+a line is presumed; for a polygon they must match.
+Function L<Math::Polygon::Calc::polygon_perimeter()|Math::Polygon::Calc/"FUNCTIONS">.
+
+=back
+
+$obj-E<gt>B<same>((OTHER|ARRAY, [TOLERANCE])|POINTS)
+
+=over 4
+
+Compare two polygons, where the polygons may be rotated wrt each
+other. This is (much) slower than L<equal()|Math::Polygon/"Simple calculations">, but some algorithms
+will cause un unpredictable rotation in the result.
+Function L<Math::Polygon::Calc::polygon_same()|Math::Polygon::Calc/"FUNCTIONS">.
+
+=back
+
+$obj-E<gt>B<startMinXY>
+
+=over 4
+
+Returns a new polygon object, where the point with the smallest x coordinate
+is at the start (and end, of course).  If more points share the x coordinate,
+the smallest y-values will make the final decission.
+Function L<Math::Polygon::Calc::polygon_start_minxy()|Math::Polygon::Calc/"FUNCTIONS">.
+
+=back
+
+$obj-E<gt>B<string>
+
+=over 4
+
+=back
+
+=head2 Clipping
+
+
+$obj-E<gt>B<fillClip1>(BOX)
+
+=over 4
+
+Clipping a polygon into rectangles can be done in various ways.
+With this algorithm, the parts of the polygon which are outside
+the BOX are mapped on the borders.  The polygon stays in one piece,
+but may have vertices which are followed in two directions.
+
+Returned is one polygon, which is cleaned from double points,
+spikes and superfluous intermediate points, or undef.
+
+=back
+
+$obj-E<gt>B<lineClip>(BOX)
+
+=over 4
+
+Returned is a list of ARRAYS-OF-POINTS containing line pieces
+from the input polygon.
+Function L<Math::Polygon::Clip::polygon_line_clip()|Math::Polygon::Clip/"FUNCTIONS">.
+
+=back
+
+
+
+
+
+
+
+
+=head1 REFERENCES
+
+See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more details.
+
+=head1 COPYRIGHTS
+
+Module version 0.001.
+Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
+other contributors.
+
+Copyright (c) 2004 by the author(s). All rights reserved.  This program
+is free software; you can redistribute it and/or modify it under the
+same terms as Perl itself.
+
+

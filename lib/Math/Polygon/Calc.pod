@@ -1,0 +1,55 @@
+
+=head1 NAME
+
+Math::Polygon::Calc - Simple polygon calculations
+
+
+=head1 INHERITANCE
+
+ Math::Polygon::Calc
+   is a Exporter
+
+
+=head1 SYNOPSIS
+
+ my @poly = ( [1,2], [2,4], [5,7], [1, 2] );
+
+ my ($xmin, $ymin, $xmax, $ymax) = polygon_bbox @poly;
+
+ my $area = polygon_area @poly;
+ MY $L    = polygon_perimeter @poly;
+ if(polygon_is_clockwise @poly) { ... };
+ 
+ my @rot  = polygon_start_minxy @poly;
+
+
+=head1 DESCRIPTION
+
+This packages contains a wide variaty of relatively easy polygon
+calculations.  More complex calculations are put in separate
+packages.
+
+
+
+
+
+
+
+
+
+
+=head1 REFERENCES
+
+See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more details.
+
+=head1 COPYRIGHTS
+
+Module version 0.001.
+Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
+other contributors.
+
+Copyright (c) 2004 by the author(s). All rights reserved.  This program
+is free software; you can redistribute it and/or modify it under the
+same terms as Perl itself.
+
+
