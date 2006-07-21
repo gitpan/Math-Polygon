@@ -3,7 +3,7 @@ use warnings;
 
 package Math::Polygon::Calc;
 use vars '$VERSION';
-$VERSION = '0.003';
+$VERSION = '0.004';
 use base 'Exporter';
 
 our @EXPORT = qw/
@@ -84,7 +84,7 @@ sub polygon_perimeter(@)
 
 sub polygon_start_minxy(@)
 {   return @_ if @_ <= 1;
-    my $ring  = $_[0][0]==$_[-1][0] && $_[-1][1]==$_[-1][1];
+    my $ring  = $_[0][0]==$_[-1][0] && $_[0][1]==$_[-1][1];
     pop @_ if $ring;
 
     my ($xmin, $ymin) = polygon_bbox @_;

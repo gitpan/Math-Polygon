@@ -85,7 +85,7 @@ B<area>
 
 Returns the area enclosed by the outer polygon, minus the areas of the
 inner polygons.
-See method L<Math::Polygon::area()|Math::Polygon/"Simple calculations">.
+See method L<Math::Polygon::area()|Math::Polygon/"Geometry">.
 
 =back
 
@@ -95,7 +95,7 @@ $obj-E<gt>B<bbox>
 
 Returns a list with four elements: (xmin, ymin, xmax, ymax), which describe
 the bounding box of the surface, which is the bbox of the outer polygon.
-See method L<Math::Polygon::bbox()|Math::Polygon/"Simple calculations">.
+See method L<Math::Polygon::bbox()|Math::Polygon/"Geometry">.
 
 =back
 
@@ -104,7 +104,7 @@ $obj-E<gt>B<perimeter>
 =over 4
 
 The length of the border: sums outer and inner perimeters.
-See method L<Math::Polygon::perimeter()|Math::Polygon/"Simple calculations">.
+See method L<Math::Polygon::perimeter()|Math::Polygon/"Geometry">.
 
 =back
 
@@ -152,7 +152,7 @@ See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more detail
 
 =head1 COPYRIGHTS
 
-Module version 0.003.
+Module version 0.004.
 Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
 other contributors.
 

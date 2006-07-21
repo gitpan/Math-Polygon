@@ -60,7 +60,7 @@ overruled.
 =over 4
 
 Usually computed from the figure automatically, but can also be
-specified as [xmin,ymin,xmax, ymax].  See L<bbox()|Math::Polygon/"Simple calculations">.
+specified as [xmin,ymin,xmax, ymax].  See L<bbox()|Math::Polygon/"Geometry">.
 
 =back
 
@@ -68,7 +68,7 @@ specified as [xmin,ymin,xmax, ymax].  See L<bbox()|Math::Polygon/"Simple calcula
 
 =over 4
 
-Is not specified, it will be computed by the L<isClockwise()|Math::Polygon/"Simple calculations"> method
+Is not specified, it will be computed by the L<isClockwise()|Math::Polygon/"Geometry"> method
 on demand.
 
 =back
@@ -128,7 +128,7 @@ reference to an ARRAY.
 
 =back
 
-=head2 Simple calculations
+=head2 Geometry
 
 
 $obj-E<gt>B<area>
@@ -202,7 +202,7 @@ $obj-E<gt>B<equal>((OTHER|ARRAY, [TOLERANCE])|POINTS)
 =over 4
 
 Compare two polygons, on the level of points. When the polygons are
-the same but rotated, this will return false. See L<same()|Math::Polygon/"Simple calculations">.
+the same but rotated, this will return false. See L<same()|Math::Polygon/"Geometry">.
 Function L<Math::Polygon::Calc::polygon_equal()|Math::Polygon::Calc/"FUNCTIONS">.
 
 =back
@@ -233,7 +233,7 @@ $obj-E<gt>B<same>((OTHER|ARRAY, [TOLERANCE])|POINTS)
 =over 4
 
 Compare two polygons, where the polygons may be rotated wrt each
-other. This is (much) slower than L<equal()|Math::Polygon/"Simple calculations">, but some algorithms
+other. This is (much) slower than L<equal()|Math::Polygon/"Geometry">, but some algorithms
 will cause un unpredictable rotation in the result.
 Function L<Math::Polygon::Calc::polygon_same()|Math::Polygon::Calc/"FUNCTIONS">.
 
@@ -248,12 +248,6 @@ that the point which is losest to the left-bottom point of the bouding
 box has become the first.
 
 Function L<Math::Polygon::Calc::polygon_start_minxy()|Math::Polygon::Calc/"FUNCTIONS">.
-
-=back
-
-$obj-E<gt>B<string>
-
-=over 4
 
 =back
 
@@ -536,7 +530,7 @@ See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more detail
 
 =head1 COPYRIGHTS
 
-Module version 0.003.
+Module version 0.004.
 Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
 other contributors.
 

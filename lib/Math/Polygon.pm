@@ -3,7 +3,7 @@ use warnings;
 
 package Math::Polygon;
 use vars '$VERSION';
-$VERSION = '0.003';
+$VERSION = '0.004';
 
 use Math::Polygon::Calc;
 use Math::Polygon::Clip;
@@ -53,15 +53,13 @@ sub point(@)
 }
 
 
-sub string() { polygon_string(shift->points) }
-
-
 sub bbox()
 {   my $self = shift;
     return @{$self->{MP_bbox}} if $self->{MP_bbox};
 
     my @bbox = polygon_bbox $self->points;
     $self->{MP_bbox} = \@bbox;
+    @bbox;
 }
 
 
@@ -233,5 +231,10 @@ sub fillClip1($$$$)
     my @clip = polygon_fill_clip1 \@bbox, $self->points;
     $self->new(points => \@clip);
 }
+
+
+sub string() { polygon_string(shift->points) }
+
+
 
 1;
