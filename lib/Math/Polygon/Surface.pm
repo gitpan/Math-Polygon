@@ -1,9 +1,13 @@
+# Copyrights 2004-2007 by Mark Overmeer.
+# For other contributors see ChangeLog.
+# See the manual pages for details on the licensing terms.
+# Pod stripped from pm file by OODoc 0.99.
 use strict;
 use warnings;
 
 package Math::Polygon::Surface;
 use vars '$VERSION';
-$VERSION = '0.004';
+$VERSION = '0.96';
 use Math::Polygon;
 
 
@@ -34,7 +38,7 @@ sub init($$)
     }
     else
     {   $outer = $args->{outer}
-            or die "ERROR: Surface requires outer polygon\n";
+            or die "ERROR: surface requires outer polygon\n";
 
         @inner = @{$args->{inner}} if defined $args->{inner};
     }

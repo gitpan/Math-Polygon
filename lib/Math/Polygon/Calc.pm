@@ -1,9 +1,13 @@
+# Copyrights 2004-2007 by Mark Overmeer.
+# For other contributors see ChangeLog.
+# See the manual pages for details on the licensing terms.
+# Pod stripped from pm file by OODoc 0.99.
 use strict;
 use warnings;
 
 package Math::Polygon::Calc;
 use vars '$VERSION';
-$VERSION = '0.004';
+$VERSION = '0.96';
 use base 'Exporter';
 
 our @EXPORT = qw/
@@ -22,6 +26,7 @@ our @EXPORT = qw/
 /;
 
 use List::Util    qw/min max/;
+use Carp          qw/croak/;
 
 
 sub polygon_string(@) { join ', ', map { "[$_->[0],$_->[1]]" } @_ }
@@ -50,6 +55,10 @@ sub polygon_area(@)
 
 sub polygon_is_clockwise(@)
 {   my $area  = 0;
+
+    polygon_is_closed(@_)
+       or croak "ERROR: polygon must be closed: begin==end";
+
     while(@_ >= 2)
     {   $area += $_[0][0]*$_[1][1] - $_[0][1]*$_[1][0];
         shift;
@@ -229,7 +238,6 @@ sub polygon_same($$;$)
 }
 
 
-
 # Algorithms can be found at
 # http://astronomy.swin.edu.au/~pbourke/geometry/insidepoly/
 # p1 = polygon[0];
@@ -257,6 +265,9 @@ sub polygon_contains_point($@)
     my ($x, $y) = @$point;
     my $inside  = 0;
 
+    polygon_is_closed(@_)
+       or croak "ERROR: polygon must be closed: begin==end";
+
     my ($px, $py) = @{ (shift) };
     while(@_)
     {   my ($nx, $ny) = @{ (shift) };
@@ -276,6 +287,12 @@ sub polygon_contains_point($@)
     }
 
     $inside;
+}
+
+
+sub polygon_is_closed(@)
+{   my ($first, $last) = @_[0,-1];
+    $first->[0]==$last->[0] && $first->[1]==$last->[1];
 }
 
 1;

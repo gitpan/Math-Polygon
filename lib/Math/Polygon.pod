@@ -1,9 +1,6 @@
-
 =head1 NAME
 
 Math::Polygon - Class for maintaining polygon data
-
-
 
 =head1 SYNOPSIS
 
@@ -21,19 +18,14 @@ Math::Polygon - Class for maintaining polygon data
 
  my $boxed = $poly->lineClip($xmin, $xmax, $ymin, $ymax);
 
-
 =head1 DESCRIPTION
 
 This class provides an OO interface around L<Math::Polygon::Calc|Math::Polygon::Calc>
 and L<Math::Polygon::Clip|Math::Polygon::Clip>.
 
-
-
 =head1 METHODS
 
-
 =head2 Constructors
-
 
 $obj-E<gt>B<new>([OPTIONS], [POINTS], [OPTIONS])
 
@@ -50,10 +42,10 @@ new polygon is derived from the callee, and therefore some facts
 (like clockwise or anti-clockwise direction) will get copied unless
 overruled.
 
- Option     Defined in       Default
- bbox                        undef  
- clockwise                   undef  
- points                      undef  
+ Option   --Default
+ bbox       undef
+ clockwise  undef
+ points     undef
 
 . bbox ARRAY
 
@@ -83,7 +75,6 @@ See L<points()|Math::Polygon/"Attributes"> and L<nrPoints()|Math::Polygon/"Attri
 
 I<Example:> creation of new polygon
 
-
  my $p = Math::Polygon->new([1,0],[1,1],[0,1],[0,0],[1,0]);
 
  my @p = ([1,0],[1,1],[0,1],[0,0],[1,0]);
@@ -92,7 +83,6 @@ I<Example:> creation of new polygon
 =back
 
 =head2 Attributes
-
 
 $obj-E<gt>B<nrPoints>
 
@@ -130,7 +120,6 @@ reference to an ARRAY.
 
 =head2 Geometry
 
-
 $obj-E<gt>B<area>
 
 =over 4
@@ -165,8 +154,8 @@ Polygons, certainly after some computations, can have a lot of
 horrible artifacts: points which are double, spikes, etc.  This
 functions provided by this module beautify
 
- Option         Defined in  Default
- remove_spikes              <false>
+ Option       --Default
+ remove_spikes  <false>
 
 . remove_spikes BOOLEAN
 
@@ -217,6 +206,15 @@ the polygon), and the result is therefore cached.
 
 =back
 
+$obj-E<gt>B<isClosed>
+
+=over 4
+
+Returns true if the first point of the poly definition is the same
+as the last point.
+
+=back
+
 $obj-E<gt>B<perimeter>
 
 =over 4
@@ -264,8 +262,8 @@ $obj-E<gt>B<grid>(OPTIONS)
 Returns a polygon object with the points snapped to grid points.
 See L<Math::Polygon::Transform::polygon_grid()|Math::Polygon::Transform/"FUNCTIONS">.
 
- Option  Defined in  Default
- raster              1.0    
+ Option--Default
+ raster  1.0
 
 . raster FLOAT
 
@@ -286,12 +284,12 @@ $obj-E<gt>B<mirror>(OPTIONS)
 Mirror the polygon in a line.  Only one of the options can be provided.
 Some programs call this "flip" or "flop".
 
- Option  Defined in       Default 
- b                        C<0>    
- line                     <undef> 
- rc                       C<undef>
- x                        C<undef>
- y                        C<undef>
+ Option--Default
+ b       0
+ line    <undef>
+ rc      undef
+ x       undef
+ y       undef
 
 . b FLOAT
 
@@ -346,9 +344,9 @@ $obj-E<gt>B<move>(OPTIONS)
 Returns a moved polygon object: all point are moved over the
 indicated distance.  See L<Math::Polygon::Transform::polygon_move()|Math::Polygon::Transform/"FUNCTIONS">.
 
- Option  Defined in       Default
- dx                       0      
- dy                       0      
+ Option--Default
+ dx      0
+ dy      0
 
 . dx FLOAT
 
@@ -375,11 +373,11 @@ $obj-E<gt>B<resize>(OPTIONS)
 Returns a resized polygon object.
 See L<Math::Polygon::Transform::polygon_resize()|Math::Polygon::Transform/"FUNCTIONS">.
 
- Option  Defined in       Default 
- center                   C<[0,0]>
- scale                    C<1.0>  
- xscale                   <scale> 
- yscale                   <scale> 
+ Option--Default
+ center  [0,0]
+ scale   1.0
+ xscale  <scale>
+ yscale  <scale>
 
 . center POINT
 
@@ -418,10 +416,10 @@ $obj-E<gt>B<rotate>(OPTIONS)
 Returns a rotated polygon object: all point are moved over the
 indicated distance.  See L<Math::Polygon::Transform::polygon_rotate()|Math::Polygon::Transform/"FUNCTIONS">.
 
- Option   Defined in       Default 
- center                    C<[0,0]>
- degrees                   0       
- radians                   0       
+ Option --Default
+ center   [0,0]
+ degrees  0
+ radians  0
 
 . center POINT
 
@@ -450,10 +448,10 @@ $obj-E<gt>B<simplify>(OPTIONS)
 Returns a polygon object where points are removed.
 See L<Math::Polygon::Transform::polygon_simplify()|Math::Polygon::Transform/"FUNCTIONS">.
 
- Option      Defined in       Default  
- max_points                   C<undef> 
- same                         C<0.0001>
- slope                        C<undef> 
+ Option    --Default
+ max_points  undef
+ same        0.0001
+ slope       undef
 
 . max_points INTEGER
 
@@ -492,7 +490,6 @@ Removing points will change the area of the polygon.
 
 =head2 Clipping
 
-
 $obj-E<gt>B<fillClip1>(BOX)
 
 =over 4
@@ -517,25 +514,16 @@ Function L<Math::Polygon::Clip::polygon_line_clip()|Math::Polygon::Clip/"FUNCTIO
 
 =back
 
+=head1 SEE ALSO
 
+This module is part of Math-Polygon distribution version 0.96,
+built on March 09, 2007. Website: F<http://perl.overmeer.net/geo/>
 
+=head1 LICENSE
 
+Copyrights 2004-2007 by Mark Overmeer.For other contributors see ChangeLog.
 
-
-
-
-=head1 REFERENCES
-
-See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more details.
-
-=head1 COPYRIGHTS
-
-Module version 0.004.
-Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
-other contributors.
-
-Copyright (c) 2004 by the author(s). All rights reserved.  This program
-is free software; you can redistribute it and/or modify it under the
-same terms as Perl itself.
-
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+See F<http://www.perl.com/perl/misc/Artistic.html>
 

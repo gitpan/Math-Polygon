@@ -1,14 +1,11 @@
-
 =head1 NAME
 
 Math::Polygon::Clip - frame a polygon in a square
 
-
 =head1 INHERITANCE
 
  Math::Polygon::Clip
-   is a Exporter
-
+   is an Exporter
 
 =head1 SYNOPSIS
 
@@ -17,32 +14,73 @@ Math::Polygon::Clip - frame a polygon in a square
 
  my $boxed = polygon_clip \@box, @poly;
 
-
 =head1 DESCRIPTION
 
 Cut-off all parts of the polygon which are outside the box
 
+=head1 FUNCTIONS
 
+B<polygon_fill_clip1>(ARRAY-BOX, LIST-OF-POINTS)
 
+=over 4
 
+Clipping a polygon into rectangles can be done in various ways.
+With this algorithm (which I designed myself, but may not be new), the
+parts of the polygon which are outside the BOX are mapped on the borders.
+The polygon stays in one piece.
 
+Returned is one list of points, which is cleaned from double points,
+spikes and superfluous intermediate points.
 
+=back
 
+B<polygon_fill_clip2>(ARRAY-BOX, LIST-OF-POINTS)
 
+=over 4
 
+To be implemented.  The polygon falls apart in fragments, which are not
+connected: paths which are followed in two directions are removed.
+This is required by some applications, like polygons used in geographical
+context (country contours and such).
 
-=head1 REFERENCES
+=back
 
-See the Math::Polygon website at L<http://perl.overmeer.net/geo> for more details.
+B<polygon_fill_clip3>(ARRAY-BOX, OUT-POLY, [IN-POLYS])
 
-=head1 COPYRIGHTS
+=over 4
 
-Module version 0.004.
-Written by Mark Overmeer (polygon@overmeer.net).  See the ChangeLog for
-other contributors.
+To be implemented.  A surrounding polygon, with possible
+inclussions.
 
-Copyright (c) 2004 by the author(s). All rights reserved.  This program
-is free software; you can redistribute it and/or modify it under the
-same terms as Perl itself.
+=back
 
+B<polygon_line_clip>(ARRAY-BOX, LIST-OF-POINTS)
+
+=over 4
+
+Returned is a list of ARRAYS (possibly 0 long) containing line pieces
+from the input polygon (or line).
+
+I<Example:> 
+
+ my @points = ( [1,2], [2,3], [2,0], [1,-1], [1,2] );
+ my @bbox   = ( 0, -2, 2, 2 );
+ my @l      = polygon_line_clip \@bbox, @points;
+ print scalar @l;      # 1, only one piece found
+ my @first = @{$l[0]}; # first is [2,0], [1,-1], [1,2]
+
+=back
+
+=head1 SEE ALSO
+
+This module is part of Math-Polygon distribution version 0.96,
+built on March 09, 2007. Website: F<http://perl.overmeer.net/geo/>
+
+=head1 LICENSE
+
+Copyrights 2004-2007 by Mark Overmeer.For other contributors see ChangeLog.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+See F<http://www.perl.com/perl/misc/Artistic.html>
 
