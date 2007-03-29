@@ -1,13 +1,13 @@
 # Copyrights 2004-2007 by Mark Overmeer.
 # For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 0.99.
+# Pod stripped from pm file by OODoc 1.00.
 use strict;
 use warnings;
 
 package Math::Polygon::Transform;
 use vars '$VERSION';
-$VERSION = '0.96';
+$VERSION = '0.97';
 use base 'Exporter';
 
 use Math::Trig   qw/deg2rad pi rad2deg/;
@@ -58,7 +58,7 @@ sub polygon_move(@)
 }
 
 
-sub polygon_rotate($@)
+sub polygon_rotate(@)
 {   my %opts;
     while(@_ && !ref $_[0])
     {   my $key     = shift;
