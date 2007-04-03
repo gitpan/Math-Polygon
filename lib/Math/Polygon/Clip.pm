@@ -8,7 +8,7 @@ use warnings;
 
 package Math::Polygon::Clip;
 use vars '$VERSION';
-$VERSION = '0.97';
+$VERSION = '0.99';
 use base 'Exporter';
 
 our @EXPORT = qw/

@@ -7,7 +7,7 @@ use warnings;
 
 package Math::Polygon::Transform;
 use vars '$VERSION';
-$VERSION = '0.97';
+$VERSION = '0.99';
 use base 'Exporter';
 
 use Math::Trig   qw/deg2rad pi rad2deg/;

@@ -7,7 +7,7 @@ use warnings;
 
 package Math::Polygon::Surface;
 use vars '$VERSION';
-$VERSION = '0.97';
+$VERSION = '0.99';
 use Math::Polygon;
 
 

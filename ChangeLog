@@ -1,8 +1,15 @@
 Revision history for Perl extension Math::Polygon
 
+version 0.99:
+
+version 0.98: Tue Apr  3 09:38:57 CEST 2007
+
+	- missing export of polygon_is_closed [Christian Sauer]
+
 version 0.97: Thu Mar 29 08:48:14 CEST 2007
 
-	- fix prototype of polygon_rotate, to fix method rotate() [ville9]
+	- fix prototype of polygon_rotate, to fix method rotate()
+	  [Christian Sauer]
 
 version 0.96: Fri Mar  9 14:19:41 CET 2007
 

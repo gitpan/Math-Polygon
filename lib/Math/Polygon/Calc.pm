@@ -7,7 +7,7 @@ use warnings;
 
 package Math::Polygon::Calc;
 use vars '$VERSION';
-$VERSION = '0.97';
+$VERSION = '0.99';
 use base 'Exporter';
 
 our @EXPORT = qw/
@@ -16,6 +16,7 @@ our @EXPORT = qw/
  polygon_beautify
  polygon_equal
  polygon_is_clockwise
+ polygon_is_closed
  polygon_clockwise
  polygon_counter_clockwise
  polygon_perimeter

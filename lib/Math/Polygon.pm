@@ -7,7 +7,7 @@ use warnings;
 
 package Math::Polygon;
 use vars '$VERSION';
-$VERSION = '0.97';
+$VERSION = '0.99';
 
 use Math::Polygon::Calc;
 use Math::Polygon::Clip;
