@@ -1,6 +1,21 @@
 Revision history for Perl extension Math::Polygon
 
-version 0.99:
+20070425 Request by Christian Sauer: polygon intersection
+   paper with nice algorithm: http://citeseer.ist.psu.edu/cache/papers/cs/25021/http:zSzzSzfractal.dam.fmph.uniba.skzSz~sccgzSzproceedingszSz1998zSzZalik.pdf/zalik98quick.pdf
+
+version 1.00: Fri Feb  1 15:32:20 CET 2008
+
+	- ::Calc::polygon_is_open() will die on empty polygon
+
+	- correct ::Calc::polygon_contains_point() for point on vertical
+	  edge. Spotted by [Rino Ingenito]
+
+version 0.99: Fri Jun  8 16:31:33 CEST 2007
+
+	- fillClip1() did not handle empty result connectly, neither
+	  did ::Clip::polygon_fill_clip1().  Reported by [Christian Sauer]
+
+	- added t/pod.t
 
 version 0.98: Tue Apr  3 09:38:57 CEST 2007
 

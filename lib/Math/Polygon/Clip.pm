@@ -1,14 +1,14 @@
-# Copyrights 2004-2007 by Mark Overmeer.
-# For other contributors see ChangeLog.
+# Copyrights 2004,2006-2008 by Mark Overmeer.
+#  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 1.00.
+# Pod stripped from pm file by OODoc 1.03.
 
 use strict;
 use warnings;
 
 package Math::Polygon::Clip;
 use vars '$VERSION';
-$VERSION = '0.99';
+$VERSION = '1.00';
 use base 'Exporter';
 
 our @EXPORT = qw/
@@ -30,6 +30,7 @@ sub _remove_doubles(@);
 sub polygon_fill_clip1($@)
 {   my $bbox = shift;
     my ($xmin, $ymin, $xmax, $ymax) = @$bbox;
+    @_ or return ();  # empty list of points
 
     # Collect all crosspoints with axes, plus the original points
     my $next   = shift;
@@ -63,12 +64,10 @@ sub polygon_line_clip($@)
     my $fromin = _inside $bbox, $from;
     push @frags, [ $from ] if $fromin;
 
-#warn @_." to go\n";
     while(@_)
     {   my $next   = shift;
         my $nextin = _inside $bbox, $next;
 
-#warn "1-> $fromin $nextin\n";
         if($fromin && $nextin)       # stay within
         {   push @{$frags[-1]}, $next;
         }
@@ -84,11 +83,6 @@ sub polygon_line_clip($@)
             push @frags, \@cross if @cross;
         }
 
-#if(@frags)
-#{  my $x = Dumper $frags[-1];
-#   $x =~ s/\s*//gs;
-#   warn $x,"\n";
-#}
         ($from, $fromin) = ($next, $nextin);
     }
 

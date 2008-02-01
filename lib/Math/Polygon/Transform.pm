@@ -1,13 +1,13 @@
-# Copyrights 2004-2007 by Mark Overmeer.
-# For other contributors see ChangeLog.
+# Copyrights 2004,2006-2008 by Mark Overmeer.
+#  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 1.00.
+# Pod stripped from pm file by OODoc 1.03.
 use strict;
 use warnings;
 
 package Math::Polygon::Transform;
 use vars '$VERSION';
-$VERSION = '0.99';
+$VERSION = '1.00';
 use base 'Exporter';
 
 use Math::Trig   qw/deg2rad pi rad2deg/;

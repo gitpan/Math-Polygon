@@ -2,6 +2,8 @@
 
 Math::Polygon - Class for maintaining polygon data
 
+=head1 INHERITANCE
+
 =head1 SYNOPSIS
 
  my $poly = Math::Polygon->new( [1,2], [2,4], [5,7], [1,2] );
@@ -47,7 +49,7 @@ overruled.
  clockwise  undef
  points     undef
 
-. bbox ARRAY
+. bbox => ARRAY
 
 =over 4
 
@@ -56,7 +58,7 @@ specified as [xmin,ymin,xmax, ymax].  See L<bbox()|Math::Polygon/"Geometry">.
 
 =back
 
-. clockwise BOOLEAN
+. clockwise => BOOLEAN
 
 =over 4
 
@@ -65,7 +67,7 @@ on demand.
 
 =back
 
-. points ARRAY-OF-POINTS
+. points => ARRAY-OF-POINTS
 
 =over 4
 
@@ -73,7 +75,7 @@ See L<points()|Math::Polygon/"Attributes"> and L<nrPoints()|Math::Polygon/"Attri
 
 =back
 
-I<Example:> creation of new polygon
+example: creation of new polygon
 
  my $p = Math::Polygon->new([1,0],[1,1],[0,1],[0,0],[1,0]);
 
@@ -157,7 +159,7 @@ functions provided by this module beautify
  Option       --Default
  remove_spikes  <false>
 
-. remove_spikes BOOLEAN
+. remove_spikes => BOOLEAN
 
 =back
 
@@ -265,7 +267,7 @@ See L<Math::Polygon::Transform::polygon_grid()|Math::Polygon::Transform/"FUNCTIO
  Option--Default
  raster  1.0
 
-. raster FLOAT
+. raster => FLOAT
 
 =over 4
 
@@ -291,7 +293,7 @@ Some programs call this "flip" or "flop".
  x       undef
  y       undef
 
-. b FLOAT
+. b => FLOAT
 
 =over 4
 
@@ -299,7 +301,7 @@ Only used in combination with option C<rc> to describe a line.
 
 =back
 
-. line [POINT, POINT]
+. line => [POINT, POINT]
 
 =over 4
 
@@ -308,7 +310,7 @@ computed from the two points of the line.
 
 =back
 
-. rc FLOAT
+. rc => FLOAT
 
 =over 4
 
@@ -319,7 +321,7 @@ a vertical mirror.
 
 =back
 
-. x FLOAT
+. x => FLOAT
 
 =over 4
 
@@ -327,7 +329,7 @@ Mirror in the line C<x=value>, which means that C<y> stays unchanged.
 
 =back
 
-. y FLOAT
+. y => FLOAT
 
 =over 4
 
@@ -348,7 +350,7 @@ indicated distance.  See L<Math::Polygon::Transform::polygon_move()|Math::Polygo
  dx      0
  dy      0
 
-. dx FLOAT
+. dx => FLOAT
 
 =over 4
 
@@ -356,7 +358,7 @@ Displacement in the horizontal direction.
 
 =back
 
-. dy FLOAT
+. dy => FLOAT
 
 =over 4
 
@@ -379,9 +381,9 @@ See L<Math::Polygon::Transform::polygon_resize()|Math::Polygon::Transform/"FUNCT
  xscale  <scale>
  yscale  <scale>
 
-. center POINT
+. center => POINT
 
-. scale FLOAT
+. scale => FLOAT
 
 =over 4
 
@@ -391,7 +393,7 @@ size.  The scale will be respective from the center.
 
 =back
 
-. xscale FLOAT
+. xscale => FLOAT
 
 =over 4
 
@@ -399,7 +401,7 @@ Specific scaling factor in the horizontal direction.
 
 =back
 
-. yscale FLOAT
+. yscale => FLOAT
 
 =over 4
 
@@ -421,9 +423,9 @@ indicated distance.  See L<Math::Polygon::Transform::polygon_rotate()|Math::Poly
  degrees  0
  radians  0
 
-. center POINT
+. center => POINT
 
-. degrees FLOAT
+. degrees => FLOAT
 
 =over 4
 
@@ -431,7 +433,7 @@ specify rotation angle in degrees (between -180 and 360).
 
 =back
 
-. radians FLOAT
+. radians => FLOAT
 
 =over 4
 
@@ -453,7 +455,7 @@ See L<Math::Polygon::Transform::polygon_simplify()|Math::Polygon::Transform/"FUN
  same        0.0001
  slope       undef
 
-. max_points INTEGER
+. max_points => INTEGER
 
 =over 4
 
@@ -464,7 +466,7 @@ reached.
 
 =back
 
-. same FLOAT
+. same => FLOAT
 
 =over 4
 
@@ -473,7 +475,7 @@ is used as radius of the circle.
 
 =back
 
-. slope FLOAT
+. slope => FLOAT
 
 =over 4
 
@@ -500,7 +502,9 @@ the BOX are mapped on the borders.  The polygon stays in one piece,
 but may have vertices which are followed in two directions.
 
 Returned is one polygon, which is cleaned from double points,
-spikes and superfluous intermediate points, or undef.
+spikes and superfluous intermediate points, or C<undef> when
+no polygon is outside the BOX.
+Function L<Math::Polygon::Clip::polygon_fill_clip1()|Math::Polygon::Clip/"FUNCTIONS">.
 
 =back
 
@@ -516,12 +520,12 @@ Function L<Math::Polygon::Clip::polygon_line_clip()|Math::Polygon::Clip/"FUNCTIO
 
 =head1 SEE ALSO
 
-This module is part of Math-Polygon distribution version 0.99,
-built on April 03, 2007. Website: F<http://perl.overmeer.net/geo/>
+This module is part of Math-Polygon distribution version 1.00,
+built on February 01, 2008. Website: F<http://perl.overmeer.net/geo/>
 
 =head1 LICENSE
 
-Copyrights 2004-2007 by Mark Overmeer.For other contributors see ChangeLog.
+Copyrights 2004,2006-2008 by Mark Overmeer. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
