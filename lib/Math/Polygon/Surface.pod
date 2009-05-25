@@ -125,6 +125,18 @@ See method L<Math::Polygon::lineClip()|Math::Polygon/"Clipping">.
 
 =back
 
+$obj-E<gt>B<string>
+
+=over 4
+
+Translate the surface structure into some string.  Use Geo::WKT if you
+need a standardized format.
+
+Returned is a single string possibly containing multiple lines.  The first
+line is the outer, the other lines represent the inner polygons.
+
+=back
+
 =head1 DIAGNOSTICS
 
 Error: surface requires outer polygon
@@ -135,12 +147,12 @@ Error: surface requires outer polygon
 
 =head1 SEE ALSO
 
-This module is part of Math-Polygon distribution version 1.00,
-built on February 01, 2008. Website: F<http://perl.overmeer.net/geo/>
+This module is part of Math-Polygon distribution version 1.01,
+built on May 25, 2009. Website: F<http://perl.overmeer.net/geo/>
 
 =head1 LICENSE
 
-Copyrights 2004,2006-2008 by Mark Overmeer. For other contributors see ChangeLog.
+Copyrights 2004,2006-2009 by Mark Overmeer. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

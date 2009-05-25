@@ -166,12 +166,12 @@ B<polygon_string>(LIST-OF-POINTS)
 
 =head1 SEE ALSO
 
-This module is part of Math-Polygon distribution version 1.00,
-built on February 01, 2008. Website: F<http://perl.overmeer.net/geo/>
+This module is part of Math-Polygon distribution version 1.01,
+built on May 25, 2009. Website: F<http://perl.overmeer.net/geo/>
 
 =head1 LICENSE
 
-Copyrights 2004,2006-2008 by Mark Overmeer. For other contributors see ChangeLog.
+Copyrights 2004,2006-2009 by Mark Overmeer. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

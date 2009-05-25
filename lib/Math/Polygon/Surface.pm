@@ -1,13 +1,14 @@
-# Copyrights 2004,2006-2008 by Mark Overmeer.
+# Copyrights 2004,2006-2009 by Mark Overmeer.
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 1.03.
+# Pod stripped from pm file by OODoc 1.06.
 use strict;
 use warnings;
 
 package Math::Polygon::Surface;
 use vars '$VERSION';
-$VERSION = '1.00';
+$VERSION = '1.01';
+
 use Math::Polygon;
 
 
@@ -94,6 +95,16 @@ sub fillClip1($$$$)
       ( outer => $outer
       , inner => [ map {$_->fillClip1(@bbox)} $self->inner ]
       );
+}
+
+
+sub string()
+{   my $self = shift;
+      "["
+    . join( "]\n-["
+          , $self->outer->string
+          , map {$_->string } $self->inner)
+    . "]";
 }
 
 1;

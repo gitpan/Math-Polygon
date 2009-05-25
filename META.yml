@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Math-Polygon
-version:             1.00
+version:             1.01
 abstract:            Polygon calculations
 license:             perl
 author:              
