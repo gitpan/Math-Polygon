@@ -2,8 +2,6 @@
 
 Math::Polygon::Surface - Polygon with exclusions
 
-=head1 INHERITANCE
-
 =head1 SYNOPSIS
 
  my $outer   = Math::Polygon->new( [1,2], [2,4], [5,7], [1,2] );
@@ -19,31 +17,27 @@ from that outer polygon.
 
 =head2 Constructors
 
-$obj-E<gt>B<new>([OPTIONS], [POLYGONS], [OPTIONS])
-
-Math::Polygon::Surface-E<gt>B<new>([OPTIONS], [POLYGONS], [OPTIONS])
-
 =over 4
+
+=item $obj-E<gt>B<new>([OPTIONS], [POLYGONS], [OPTIONS])
+
+=item Math::Polygon::Surface-E<gt>B<new>([OPTIONS], [POLYGONS], [OPTIONS])
 
 You may add OPTIONS after and/or before the POLYGONS.  You may also use
 the "outer" and "inner" options.  POLYGONS are references to ARRAYs of points,
 each an ARRAY of X and Y, but better instantiated L<Math::Polygon|Math::Polygon> objects.
 
- Option--Default
- inner   []
- outer   undef
+ -Option--Default
+  inner   []
+  outer   undef
 
-. inner => ARRAY-OF-POLYGONS
+=over 2
 
-=over 4
+=item inner => ARRAY-OF-POLYGONS
 
 The inner polygons, zero or more L<Math::Polygon|Math::Polygon> objects.
 
-=back
-
-. outer => POLYGON
-
-=over 4
+=item outer => POLYGON
 
 The outer polygon, a L<Math::Polygon|Math::Polygon>.
 
@@ -53,17 +47,13 @@ The outer polygon, a L<Math::Polygon|Math::Polygon>.
 
 =head2 Attributes
 
-$obj-E<gt>B<inner>
-
 =over 4
+
+=item $obj-E<gt>B<inner>
 
 Returns a list (often empty) of inner polygons.
 
-=back
-
-$obj-E<gt>B<outer>
-
-=over 4
+=item $obj-E<gt>B<outer>
 
 Returns the outer polygon.
 
@@ -71,29 +61,21 @@ Returns the outer polygon.
 
 =head2 Simple calculations
 
-B<area>
-
 =over 4
+
+=item B<area>
 
 Returns the area enclosed by the outer polygon, minus the areas of the
 inner polygons.
 See method L<Math::Polygon::area()|Math::Polygon/"Geometry">.
 
-=back
-
-$obj-E<gt>B<bbox>
-
-=over 4
+=item $obj-E<gt>B<bbox>
 
 Returns a list with four elements: (xmin, ymin, xmax, ymax), which describe
 the bounding box of the surface, which is the bbox of the outer polygon.
 See method L<Math::Polygon::bbox()|Math::Polygon/"Geometry">.
 
-=back
-
-$obj-E<gt>B<perimeter>
-
-=over 4
+=item $obj-E<gt>B<perimeter>
 
 The length of the border: sums outer and inner perimeters.
 See method L<Math::Polygon::perimeter()|Math::Polygon/"Geometry">.
@@ -102,9 +84,9 @@ See method L<Math::Polygon::perimeter()|Math::Polygon/"Geometry">.
 
 =head2 Clipping
 
-$obj-E<gt>B<fillClip1>(BOX)
-
 =over 4
+
+=item $obj-E<gt>B<fillClip1>(BOX)
 
 Clipping a polygon into rectangles can be done in various ways.
 With this algorithm, the parts of the polygon which are outside
@@ -112,22 +94,14 @@ the BOX are mapped on the borders.
 
 All polygons are treated separately.
 
-=back
-
-$obj-E<gt>B<lineClip>(BOX)
-
-=over 4
+=item $obj-E<gt>B<lineClip>(BOX)
 
 Returned is a list of ARRAYS-OF-POINTS containing line pieces
 from the input surface.  Lines from outer and inner polygons are
 undistinguishable.
 See method L<Math::Polygon::lineClip()|Math::Polygon/"Clipping">.
 
-=back
-
-$obj-E<gt>B<string>
-
-=over 4
+=item $obj-E<gt>B<string>
 
 Translate the surface structure into some string.  Use Geo::WKT if you
 need a standardized format.
@@ -139,20 +113,20 @@ line is the outer, the other lines represent the inner polygons.
 
 =head1 DIAGNOSTICS
 
-Error: surface requires outer polygon
-
 =over 4
+
+=item Error: surface requires outer polygon
 
 =back
 
 =head1 SEE ALSO
 
-This module is part of Math-Polygon distribution version 1.01,
-built on May 25, 2009. Website: F<http://perl.overmeer.net/geo/>
+This module is part of Math-Polygon distribution version 1.02,
+built on September 19, 2011. Website: F<http://perl.overmeer.net/geo/>
 
 =head1 LICENSE
 
-Copyrights 2004,2006-2009 by Mark Overmeer. For other contributors see ChangeLog.
+Copyrights 2004,2006-2011 by Mark Overmeer. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

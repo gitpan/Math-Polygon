@@ -1,13 +1,13 @@
-# Copyrights 2004,2006-2009 by Mark Overmeer.
+# Copyrights 2004,2006-2011 by Mark Overmeer.
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 1.06.
+# Pod stripped from pm file by OODoc 2.00.
 use strict;
 use warnings;
 
 package Math::Polygon::Calc;
 use vars '$VERSION';
-$VERSION = '1.01';
+$VERSION = '1.02';
 
 use base 'Exporter';
 
@@ -25,6 +25,7 @@ our @EXPORT = qw/
  polygon_start_minxy
  polygon_string
  polygon_contains_point
+ polygon_centroid
 /;
 
 use List::Util    qw/min max/;
@@ -295,6 +296,23 @@ sub polygon_contains_point($@)
     }
 
     $inside;
+}
+
+
+sub polygon_centroid(@)
+{
+    polygon_is_closed(@_)
+        or croak "ERROR: polygon must be closed: begin==end";
+
+    my ($cx, $cy, $a) = (0, 0, 0);
+    foreach my $i (0..@_-2)
+    {    my $ap = $_[$i][0]*$_[$i+1][1] - $_[$i+1][0]*$_[$i][1];
+         $cx   += ($_[$i][0]+$_[$i+1][0]) * $ap;
+         $cy   += ($_[$i][1]+$_[$i+1][1]) * $ap;
+         $a    += $ap;
+    }
+    my $c = 3*$a; # 6*$a/2;
+    [ $cx/$c, $cy/$c ];
 }
 
 

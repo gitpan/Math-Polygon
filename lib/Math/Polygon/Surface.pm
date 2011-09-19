@@ -1,13 +1,13 @@
-# Copyrights 2004,2006-2009 by Mark Overmeer.
+# Copyrights 2004,2006-2011 by Mark Overmeer.
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 1.06.
+# Pod stripped from pm file by OODoc 2.00.
 use strict;
 use warnings;
 
 package Math::Polygon::Surface;
 use vars '$VERSION';
-$VERSION = '1.01';
+$VERSION = '1.02';
 
 use Math::Polygon;
 

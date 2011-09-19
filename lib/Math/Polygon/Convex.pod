@@ -24,9 +24,9 @@ with alternative implementations in the future.
 
 =head1 FUNCTIONS
 
-B<chainHull_2D>(POINTS)
-
 =over 4
+
+=item B<chainHull_2D>(POINTS)
 
 Each POINT is an ARRAY of two elements: the X and Y coordinate of a point.
 Returned is the enclosing convex L<Math::Polygon|Math::Polygon> object.
@@ -38,12 +38,12 @@ F<http://geometryalgorithms.com/Archive/algorithm_0109/algorithm_0109.htm>
 
 =head1 SEE ALSO
 
-This module is part of Math-Polygon distribution version 1.01,
-built on May 25, 2009. Website: F<http://perl.overmeer.net/geo/>
+This module is part of Math-Polygon distribution version 1.02,
+built on September 19, 2011. Website: F<http://perl.overmeer.net/geo/>
 
 =head1 LICENSE
 
-Copyrights 2004,2006-2009 by Mark Overmeer. For other contributors see ChangeLog.
+Copyrights 2004,2006-2011 by Mark Overmeer. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

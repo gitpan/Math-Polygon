@@ -1,13 +1,13 @@
-# Copyrights 2004,2006-2009 by Mark Overmeer.
+# Copyrights 2004,2006-2011 by Mark Overmeer.
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 1.06.
+# Pod stripped from pm file by OODoc 2.00.
 use strict;
 use warnings;
 
 package Math::Polygon;
 use vars '$VERSION';
-$VERSION = '1.01';
+$VERSION = '1.02';
 
 
 use Math::Polygon::Calc;
@@ -72,6 +72,12 @@ sub area()
 {   my $self = shift;
     return $self->{MP_area} if defined $self->{MP_area};
     $self->{MP_area} = polygon_area $self->points;
+}
+
+sub centroid()
+{   my $self = shift;
+    return $self->{MP_centroid} if $self->{MP_centroid};
+    $self->{MP_centroid} = polygon_centroid $self->points;
 }
 
 
@@ -245,6 +251,5 @@ sub fillClip1($$$$)
 
 
 sub string() { polygon_string(shift->points) }
-
 
 1;
