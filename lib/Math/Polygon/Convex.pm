@@ -1,7 +1,7 @@
-# Copyrights 2004,2006-2011 by Mark Overmeer.
+# Copyrights 2004,2006-2014 by [Mark Overmeer].
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 2.00.
+# Pod stripped from pm file by OODoc 2.01.
 # Algorithm by Dan Sunday
 # - http://geometryalgorithms.com/Archive/algorithm_0109/algorithm_0109.htm
 # Original implementation in Perl by Jari Turkia.
@@ -11,7 +11,7 @@ use warnings;
 
 package Math::Polygon::Convex;
 use vars '$VERSION';
-$VERSION = '1.02';
+$VERSION = '1.03';
 
 use base 'Exporter';
 

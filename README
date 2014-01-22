@@ -1,5 +1,5 @@
-=== README for Math-Polygon version 1.02
-=   Generated on Sun Sep 18 00:15:06 2011 by OODoc 2.00
+=== README for Math-Polygon version 1.03
+=   Generated on Tue Jan 21 14:33:15 2014 by OODoc 2.01
 
 There are various ways to install this module:
 
@@ -9,16 +9,16 @@ There are various ways to install this module:
  (2) if you use Windows, have a look at http://ppm.activestate.com/
 
  (3) if you have downloaded this module manually (as root/administrator)
-       gzip -d Math-Polygon-1.02.tar.gz
-       tar -xf Math-Polygon-1.02.tar
-       cd Math-Polygon-1.02
+       gzip -d Math-Polygon-1.03.tar.gz
+       tar -xf Math-Polygon-1.03.tar
+       cd Math-Polygon-1.03
        perl Makefile.PL
        make          # optional
        make test     # optional
        make install
 
 For usage, see the included manual-pages or
-    http://search.cpan.org/dist/Math-Polygon-1.02/
+    http://search.cpan.org/dist/Math-Polygon-1.03/
 
 Please report problems to
     http://rt.cpan.org/Dist/Display.html?Queue=Math-Polygon

@@ -1,3 +1,5 @@
+=encoding utf8
+
 =head1 NAME
 
 Math::Polygon::Calc - Simple polygon calculations
@@ -29,7 +31,7 @@ packages.
 
 =over 4
 
-=item B<polygon_area>(LIST-OF-POINTS)
+=item B<polygon_area>(LIST-of-$points)
 
 Returns the area enclosed by the polygon.  The last point of the list
 must be the same as the first to produce a correct result.
@@ -39,13 +41,13 @@ and sounds:
 
  A = abs( 1/2 * (x1y2-x2y1 + x2y3-x3y2 ...)
 
-=item B<polygon_bbox>(LIST-OF-POINTS)
+=item B<polygon_bbox>(LIST-of-$points)
 
 Returns a list with four elements: (xmin, ymin, xmax, ymax), which describe
 the bounding box of the polygon (all points of the polygon are within that
 area.
 
-=item B<polygon_beautify>([HASH], LIST-OF-POINTS)
+=item B<polygon_beautify>([HASH], LIST-of-$points)
 
 Polygons, certainly after some computations, can have a lot of
 horrible artifacts: points which are double, spikes, etc.  This
@@ -70,7 +72,7 @@ NOT IMPLEMENTED YET
 
 =back
 
-=item B<polygon_centroid>(LIST-OF-POINTS)
+=item B<polygon_centroid>(LIST-of-$points)
 
 Returns the centroid location of the polygon.  The last point of the list
 must be the same as the first to produce a correct result.
@@ -78,28 +80,28 @@ must be the same as the first to produce a correct result.
 The algorithm was found at
 F<http://en.wikipedia.org/wiki/Centroid#Centroid_of_polygon>
 
-=item B<polygon_clockwise>(LIST-OF-POINTS)
+=item B<polygon_clockwise>(LIST-of-$points)
 
 Be sure the polygon points are in clockwise order.
 
-=item B<polygon_contains_point>(POINT, LIST-OF-POINTS)
+=item B<polygon_contains_point>($point, LIST-of-$points)
 
 Returns true if the point is unside the closed polygon.
 
-=item B<polygon_counter_clockwise>(LIST-OF-POINTS)
+=item B<polygon_counter_clockwise>(LIST-of-$points)
 
 Be sure the polygon points are in counter-clockwise order.
 
-=item B<polygon_equal>(ARRAY-OF-POINTS, ARRAY-OF-POINTS, [TOLERANCE])
+=item B<polygon_equal>(ARRAY-of-$points, ARRAY-of-$points, [$tolerance])
 
 Compare two polygons, on the level of points. When the polygons are
 the same but rotated, this will return false. See L<polygon_same()|Math::Polygon::Calc/"FUNCTIONS">.
 
-=item B<polygon_is_clockwise>(LIST-OF-POINTS)
+=item B<polygon_is_clockwise>(LIST-of-$points)
 
-=item B<polygon_is_closed>(POINTS)
+=item B<polygon_is_closed>($points)
 
-=item B<polygon_perimeter>(LIST-OF-POINTS)
+=item B<polygon_perimeter>(LIST-of-$points)
 
 The length of the line of the polygon.  This can also be used to compute
 the length of any line: of the last point is not equal to the first, then
@@ -109,29 +111,29 @@ This is simply Pythagoras.
 
  $l = sqrt((x1-x0)^2 + (y1-y0)^2) + sqrt((x2-x1)^2+(y2-y1)^2) + ...
 
-=item B<polygon_same>(ARRAY-OF-POINTS, ARRAY-OF-POINTS, [TOLERANCE])
+=item B<polygon_same>(ARRAY-of-$points, ARRAY-of-$points, [$tolerance])
 
 Compare two polygons, where the polygons may be rotated wrt each
 other. This is (much) slower than L<polygon_equal()|Math::Polygon::Calc/"FUNCTIONS">, but some algorithms
 will cause un unpredictable rotation in the result.
 
-=item B<polygon_start_minxy>(LIST-OF-POINTS)
+=item B<polygon_start_minxy>(LIST-of-$points)
 
 Returns the polygon, where the point which is closest to the left-bottom
 corner of the bounding box is made first.
 
-=item B<polygon_string>(LIST-OF-POINTS)
+=item B<polygon_string>(LIST-of-$points)
 
 =back
 
 =head1 SEE ALSO
 
-This module is part of Math-Polygon distribution version 1.02,
-built on September 19, 2011. Website: F<http://perl.overmeer.net/geo/>
+This module is part of Math-Polygon distribution version 1.03,
+built on January 21, 2014. Website: F<http://perl.overmeer.net/geo/>
 
 =head1 LICENSE
 
-Copyrights 2004,2006-2011 by Mark Overmeer. For other contributors see ChangeLog.
+Copyrights 2004,2006-2014 by [Mark Overmeer]. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
